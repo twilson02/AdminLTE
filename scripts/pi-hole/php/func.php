@@ -622,20 +622,18 @@ function convertseconds($argument) {
 }
 
 function start_php_session() {
-    // Prevents javascript XSS attacks aimed to steal the session ID
-    ini_set('session.cookie_httponly', 1);
     // Prevent Session ID from being passed through URLs
     ini_set('session.use_only_cookies', 1);
-    // Allows servers to assert that a cookie ought not to be sent along
-    // with cross-site requests. This assertion allows user agents to
-    // mitigate the risk of cross-origin information leakage, and provides
-    // some protection against cross-site request forgery attacks.
+    session_start();
+    header('Set-Cookie: PHPSESSID= ' . session_id() . '; path=/; HttpOnly; SameSite=Strict');
+    // HttpOnly: Prevents javascript XSS attacks aimed to steal the session ID
+    //
+    // SameSite=Strict: Allows servers to assert that a cookie ought not to be
+    // sent along with cross-site requests. This assertion allows user agents to
+    // mitigate the risk of cross-origin information leakage, and provides some
+    // protection against cross-site request forgery attacks.
     // Direct support of Samesite has been added to PHP only in version 7.3
     // We manually set the cookie option ourselves to ensure backwards compatibility
-    $cookieParams = session_get_cookie_params();
-    $cookieParams["SameSite"] = "Strict";
-    session_set_cookie_params($cookieParams);
-    session_start();
 }
 
 ?>
