@@ -1,3 +1,4 @@
+DNS Blocking [![Better Uptime Badge](https://betteruptime.com/status-badges/v1/monitor/gvo1.svg)](https://betteruptime.com/?utm_source=status_badge)
 <p align="center">
     <a href="https://pi-hole.net/">
         <img src="https://pi-hole.github.io/graphics/Vortex/Vortex_with_Wordmark.svg" width="150" height="260" alt="Pi-hole">
